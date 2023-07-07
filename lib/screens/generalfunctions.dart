@@ -60,8 +60,6 @@ class ContorFunctions {
           await AppUsage().getAppUsage(startDate, endDate);
 
       for (var info in infoList) {
-        // print(info.appName.toString());
-        // print(info.usage.inSeconds);
         checkMaxmumUsage(info.usage.inSeconds,info.appName.toString());
       }
     } on AppUsageException catch (exception) {
