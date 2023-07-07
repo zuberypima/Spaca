@@ -9,7 +9,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:spaca/screens/generalfunctions.dart';
 import 'package:spaca/screens/usage_app.dart';
 import 'package:spaca/screens/viewapps.dart';
-import 'package:spaca/services/backgroundservices.dart';
 import 'package:spaca/services/block.dart';
 import 'package:spaca/services/blocksite.dart';
 import 'package:spaca/services/timeSelect.dart';
@@ -134,10 +133,9 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 176, 39, 39),
-        foregroundColor: Colors.black,
+        foregroundColor: Colors.white,
         title: const Text(
-          'Ant-Smartphone Addiction',
+          'Smartphone Addiction  Controler',
           // style: TextStyle(color: Colors.black),
         ),
         leading: Builder(
@@ -205,6 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ListTile(
             leading: const Icon(
               Icons.assessment_outlined,
+             
             ),
             title: const Text('App Usage'),
             onTap: () async {
@@ -305,6 +304,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Icon(
                             Icons.web,
                             size: 50,
+                             color: Colors.blueGrey,
                           ),
                           SizedBox(
                             height: 10,
@@ -344,6 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Icon(
                             Icons.check_circle,
                             size: 50,
+                             color: Colors.blueGrey,
                           ), // Replace 'icon_name_3' with the desired icon
                           SizedBox(
                             height: 10,
@@ -369,7 +370,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                BlockAppOnScreen('packageName')));
+                                BlockAppOnScreen()));
                     // Your onTap function logic goes here
                     // This function will be called when the card is tapped
                   },
@@ -382,6 +383,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Icon(
                             Icons.app_blocking,
                             size: 50,
+                             color: Colors.blueGrey,
                           ), // Replace 'icon_name_3' with the desired icon
                           SizedBox(
                             height: 10,

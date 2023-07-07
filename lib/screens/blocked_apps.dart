@@ -5,18 +5,18 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:spaca/services/home.dart';
 // ignore: must_be_immutable
-class BlockAppOnScreen extends StatefulWidget {
+class BlockedApps extends StatefulWidget {
   // String? packageName;
 
-  BlockAppOnScreen(
+  BlockedApps(
     // this.packageName, 
     {Key? key}) : super(key: key);
 
   @override
-  State<BlockAppOnScreen> createState() => _BlockAppOnScreenState();
+  State<BlockedApps> createState() => _BlockedAppsState();
 }
 
-class _BlockAppOnScreenState extends State<BlockAppOnScreen> {
+class _BlockedAppsState extends State<BlockedApps> {
   List<AppInfo> appList = [];
   List<String?> blockedApps = [];
   List<AppInfo>? appListData;
