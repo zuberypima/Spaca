@@ -55,12 +55,6 @@ class _AppUsagePageState extends State<AppUsagePage> {
   }
 
   double calculateUsagePercent(AppInfo app) {
-    // Perform your app usage calculation logic here
-    // You can use any method or library to calculate the usage percentage
-    // and return the value as a double.
-    // For example, you can use a package like `usage_stats` to calculate the usage.
-
-    // Placeholder logic: Returning random usage percentage between 0 and 100.
     return (0 +
         (100 - 0) * (DateTime.now().millisecondsSinceEpoch % 100) / 100);
   }

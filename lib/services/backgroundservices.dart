@@ -1,39 +1,29 @@
+
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_background/flutter_background.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:spaca/services/backgroundservices.dart';
-import 'package:spaca/services/functions/generalfunctions.dart';
-import 'package:spaca/services/home.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-   await  initializeService();
-  // await  FlutterBackground.initialize();
- ContorFunctions().getUsageStats();
-  // await FlutterLocalNotificationsPlugin().initialize(
-  //   InitializationSettings(
-  //     android: AndroidInitializationSettings('@mipmap/ic_launcher'),
-  //   ),
-  // );
-  runApp(const MyApp());
-}
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+
+
+class BackRuningFunctions {
+  
 Future<void> initializeService() async {
   final service = FlutterBackgroundService();
+
+  /// OPTIONAL, using custom notification channel id
   const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'my_foreground', // id
     'MY FOREGROUND SERVICE', // title
     description:
-        'This channel is used for important notifications.', 
-    importance: Importance.low, 
+        'This channel is used for important notifications.', // description
+    importance: Importance.low, // importance must be at low or higher level
   );
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -58,6 +48,7 @@ Future<void> initializeService() async {
     androidConfiguration: AndroidConfiguration(
       // this will be executed when app is in foreground or background in separated isolate
       onStart: onStart,
+      // autoStartOnBoot: true,
 
       // auto start service
       autoStart: true,
@@ -105,7 +96,6 @@ void onStart(ServiceInstance service) async {
   // Only available for flutter 3.0.0 and later
   DartPluginRegistrant.ensureInitialized();
 
-  // For flutter prior to version 3.0.0
   // We have to register the plugin manually
 
   SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -159,10 +149,6 @@ void onStart(ServiceInstance service) async {
 
     /// you can see this log in logcat
     print('FLUTTER BACKGROUND SERVICE: ${DateTime.now()}');
-    // ContorFunctions().notificationsPlugin()
-    ContorFunctions().testMyfunction();
-     ContorFunctions().getUsageStats();
-     ContorFunctions().fetchInstalledApps();
 
     // test using external plugin
     final deviceInfo = DeviceInfoPlugin();
@@ -186,19 +172,4 @@ void onStart(ServiceInstance service) async {
     );
   });
 }
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const HomeScreen());
-  }
-
- 
 }

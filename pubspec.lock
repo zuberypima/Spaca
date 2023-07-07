@@ -137,6 +137,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
+  device_info_plus:
+    dependency: "direct main"
+    description:
+      name: device_info_plus
+      sha256: "2c35b6d1682b028e42d07b3aee4b98fa62996c10bc12cb651ec856a80d6a761b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.0.2"
+  device_info_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: device_info_plus_platform_interface
+      sha256: d3b01d5868b50ae571cd1dc6e502fc94d956b665756180f7b16ead09e836fd64
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -174,6 +190,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  flutter_background_service:
+    dependency: "direct main"
+    description:
+      name: flutter_background_service
+      sha256: cd8dbba8fad41a0cd6e37be61e1edd3826358a8a03fbea9acfa2013a670cb4df
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
+  flutter_background_service_android:
+    dependency: transitive
+    description:
+      name: flutter_background_service_android
+      sha256: "16fd887d5acb8096126072f192e9cce1a359a8c28af1cee63122b1e12ffd5693"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.1"
+  flutter_background_service_ios:
+    dependency: transitive
+    description:
+      name: flutter_background_service_ios
+      sha256: "980a8eba58ad1d8c52ab3b3dc9cebd129caa2ee0ef3d37e7efb2dcb2466a65bb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+  flutter_background_service_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_background_service_platform_interface
+      sha256: "15f9cbe2f018d79a991c2468ca448f059a5a1762bf50c9cca66cefd414dcb6c1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   flutter_inappwebview:
     dependency: "direct main"
     description:
@@ -613,6 +661,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.4"
+  win32_registry:
+    dependency: transitive
+    description:
+      name: win32_registry
+      sha256: "1c52f994bdccb77103a6231ad4ea331a244dbcef5d1f37d8462f713143b0bfae"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   xdg_directories:
     dependency: transitive
     description:

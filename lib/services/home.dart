@@ -1,12 +1,14 @@
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:installed_apps/app_info.dart';
 import 'package:installed_apps/installed_apps.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:spaca/screens/usage_app.dart';
 import 'package:spaca/screens/viewapps.dart';
+import 'package:spaca/services/backgroundservices.dart';
 import 'package:spaca/services/block.dart';
 import 'package:spaca/services/blocksite.dart';
 import 'package:spaca/services/functions/generalfunctions.dart';
@@ -15,6 +17,7 @@ import 'package:spaca/services/time_slot.dart';
 import 'package:spaca/services/usage.dart';
 import 'package:spaca/services/white_list.dart';
 import 'package:flutter_background/flutter_background.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -28,26 +31,17 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController selectDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
 
-
 // for baxkkground
 
   // ignore: non_constant_identifier_names
   List<AppInfo>? app_list_data;
 
   @override
-  void initState() {   
-    
-  FlutterBackground.initialize();
-   FlutterLocalNotificationsPlugin().initialize(
-    InitializationSettings(
-      android: AndroidInitializationSettings('@mipmap/ic_launcher'),
-    ),
-  );
-
-    // WidgetsFlutterBinding.ensureInitialized();
-ContorFunctions().requestPermissions();
-    // initializeNotifications();
-ContorFunctions().startBackgroundExecution();
+  void initState() {
+  
+    // ContorFunctions().requestPermissions();
+    // ContorFunctions().startBackgroundExecution();
+     ContorFunctions().getUsageStats();
     selectDateController.text = ""; //set the initial value of text field
     endDateController.text = ""; //set the initial value of text field
 
@@ -134,8 +128,6 @@ ContorFunctions().startBackgroundExecution();
     print(app);
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -169,12 +161,8 @@ ContorFunctions().startBackgroundExecution();
         padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
-              child: Image(
-            image: AssetImage("images/time.PNG"),
-            width: 50,
-            height: 50,
-            fit: BoxFit.cover,
-          )),
+            child: Text('data'),
+          ),
           ListTile(
             leading: const Icon(
               Icons.person_outline,
@@ -188,6 +176,19 @@ ContorFunctions().startBackgroundExecution();
                       builder: (context) => const WhiteBoardScreen()));
             },
           ),
+          ElevatedButton(
+              onPressed: () {
+                print('button pressed');
+                FlutterBackgroundService().invoke("stopService");
+              },
+              child: Text('presee here')),
+
+               ElevatedButton(
+              onPressed: () {
+                print('start pressed');
+                FlutterBackgroundService().invoke("setAsBackground");
+              },
+              child: Text('start')),
           ListTile(
             leading: const Icon(
               Icons.av_timer,
@@ -295,7 +296,7 @@ ContorFunctions().startBackgroundExecution();
                     // This function will be called when the card is tapped
                     const Text('Card tapped!');
                   },
-                  child:Card(
+                  child: Card(
                     child: Padding(
                       padding: EdgeInsets.all(25.0),
                       child: Column(
@@ -329,7 +330,7 @@ ContorFunctions().startBackgroundExecution();
                         context,
                         // MaterialPageRoute(
                         //     builder: (context) => const AppUsagePage()));
-                             MaterialPageRoute(
+                        MaterialPageRoute(
                             builder: (context) => const UsageAppStatus()));
                     // Your onTap function logic goes here
                     // This function will be called when the card is tapped
