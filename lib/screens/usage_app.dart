@@ -19,7 +19,8 @@ class _UsageAppStatusState extends State<UsageAppStatus> {
   void getUsageStats() async {
     try {
       DateTime endDate = DateTime.now();
-      DateTime startDate = endDate.subtract(Duration(hours: 1));
+      // DateTime startDate = endDate.subtract(Duration(hours: 3));
+      DateTime startDate = DateTime(endDate.year,endDate.month,endDate.day);
       List<AppUsageInfo> infoList =
           await AppUsage().getAppUsage(startDate, endDate);
       setState(() => _infos = infoList);
@@ -37,7 +38,7 @@ class _UsageAppStatusState extends State<UsageAppStatus> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text('Show Apps Usage'),
+        title: Text('Apps Usage'),
       ),
       body: ListView.builder(
           itemCount: _infos.length,

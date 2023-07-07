@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:installed_apps/app_info.dart';
 import 'package:installed_apps/installed_apps.dart';
-import 'package:spaca/services/functions/generalfunctions.dart';
+import 'package:spaca/screens/generalfunctions.dart';
 import 'package:spaca/services/home.dart';
 
 class AppUsageInfo {
