@@ -38,6 +38,7 @@ class _BlockedAppsState extends State<BlockedApps> {
     });
   }
 
+
   void toggleAppBlock(String? packageName) {
     setState(() {
       if (blockedApps.contains(packageName)) {
@@ -62,6 +63,7 @@ class _BlockedAppsState extends State<BlockedApps> {
     }
   }
 
+
   void initializeNotifications() {
     var initializationSettingsAndroid =
         const AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -69,6 +71,7 @@ class _BlockedAppsState extends State<BlockedApps> {
         InitializationSettings(android: initializationSettingsAndroid);
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
+
 
   void showNotification(String message) async {
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
