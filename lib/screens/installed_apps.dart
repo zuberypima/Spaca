@@ -4,14 +4,14 @@ import 'package:installed_apps/app_info.dart';
 import 'package:installed_apps/installed_apps.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class BlockedApps extends StatefulWidget {
-  const BlockedApps({super.key});
+class AllInstalledApps extends StatefulWidget {
+  const AllInstalledApps({super.key});
 
   @override
-  State<BlockedApps> createState() => _BlockedAppsState();
+  State<AllInstalledApps> createState() => _AllInstalledAppsState();
 }
 
-class _BlockedAppsState extends State<BlockedApps> {
+class _AllInstalledAppsState extends State<AllInstalledApps> {
   // List<AppUsageInfo> _infos = [];
   List<AppInfo> _inforun = [];
   List<String?> blockedApps = [];
@@ -52,7 +52,7 @@ void toggleAppBlock(String? packageName) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text('Blocked Apps'),
+        title: Text('All installaed Apps'),
       ),
       body: ListView.builder(
           itemCount: _inforun.length,

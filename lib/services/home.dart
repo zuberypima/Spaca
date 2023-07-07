@@ -6,7 +6,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:installed_apps/app_info.dart';
 import 'package:installed_apps/installed_apps.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:spaca/screens/blocked_apps.dart';
 import 'package:spaca/screens/generalfunctions.dart';
+import 'package:spaca/screens/installed_apps.dart';
 import 'package:spaca/screens/usage_app.dart';
 import 'package:spaca/screens/viewapps.dart';
 import 'package:spaca/services/block.dart';
@@ -297,7 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   child: Card(
                     child: Padding(
-                      padding: EdgeInsets.all(25.0),
+                      padding: EdgeInsets.all(15.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -337,7 +339,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   child: Card(
                     child: Padding(
-                      padding: EdgeInsets.all(25.0),
+                      padding: EdgeInsets.all(15.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -365,18 +367,55 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pop(context);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                BlockAppOnScreen()));
+                                AllInstalledApps()));
                     // Your onTap function logic goes here
                     // This function will be called when the card is tapped
                   },
                   child: Card(
                     child: Padding(
-                      padding: EdgeInsets.all(25.0),
+                      padding: EdgeInsets.all(15.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(
+                            Icons.install_mobile_sharp,
+                            size: 50,
+                             color: Colors.blueGrey,
+                          ), // Replace 'icon_name_3' with the desired icon
+                          SizedBox(
+                            height: 10,
+                            width: 10,
+                          ),
+                          Text(
+                            'Installed Apps',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                   GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                BlockedApps()));
+                    // Your onTap function logic goes here
+                    // This function will be called when the card is tapped
+                  },
+                  child: Card(
+                    child: Padding(
+                      padding: EdgeInsets.all(15.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -390,7 +429,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 10,
                           ),
                           Text(
-                            'Block App',
+                            'Blocked App',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 12,
