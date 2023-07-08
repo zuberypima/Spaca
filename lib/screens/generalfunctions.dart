@@ -68,7 +68,7 @@ class ContorFunctions {
   }
 
   checkMaxmumUsage(int usageTime,String appused) {
-    int setedTime = 200;
+    int setedTime = 200;  
     if (usageTime > setedTime) {
       print(appused);
       print(usageTime);
