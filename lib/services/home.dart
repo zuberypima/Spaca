@@ -9,6 +9,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:spaca/screens/blocked_apps.dart';
 import 'package:spaca/screens/generalfunctions.dart';
 import 'package:spaca/screens/installed_apps.dart';
+import 'package:spaca/screens/notification.dart';
 import 'package:spaca/screens/usage_app.dart';
 import 'package:spaca/screens/viewapps.dart';
 import 'package:spaca/services/block.dart';
@@ -43,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // ContorFunctions().requestPermissions();
     // ContorFunctions().startBackgroundExecution();
      ContorFunctions().getUsageStats();
+     LocalNotificationService().notificationInitializeService();
     selectDateController.text = ""; //set the initial value of text field
     endDateController.text = ""; //set the initial value of text field
 

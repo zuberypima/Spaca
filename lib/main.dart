@@ -9,58 +9,57 @@ import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spaca/screens/generalfunctions.dart';
+import 'package:spaca/screens/notification.dart';
 import 'package:spaca/services/home.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   await  initializeService();
- ContorFunctions().getUsageStats();
- 
+  await initializeService();
+  ContorFunctions().getUsageStats();
+
   runApp(const MyApp());
 }
 
 Future<void> initializeService() async {
   final service = FlutterBackgroundService();
-  const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'my_foreground', // id
-    'MY FOREGROUND SERVICE', // title
-    description:
-        'This channel is used for important notifications.', 
-    importance: Importance.low, 
-  );
 
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  //this is for notification 
+  // const AndroidNotificationChannel channel = AndroidNotificationChannel(
+  //   'my_foreground', // id
+  //   'MY FOREGROUND SERVICE', // title
+  //   description: 'This channel is used for important notifications.',
+  //   importance: Importance.max,
+  // );
 
-  if (Platform.isIOS || Platform.isAndroid) {
-    await flutterLocalNotificationsPlugin.initialize(
-      const InitializationSettings(
-        iOS: DarwinInitializationSettings(),
-        android: AndroidInitializationSettings('ic_bg_service_small'),
-      ),
-    );
-  }
+  // final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  //     FlutterLocalNotificationsPlugin();
 
+  // if (Platform.isIOS || Platform.isAndroid) {
+  //   await flutterLocalNotificationsPlugin.initialize(
+  //     const InitializationSettings(
+  //       iOS: DarwinInitializationSettings(),
+  //       android: AndroidInitializationSettings('ic_bg_service_small'),
+  //     ),
+  //   );
+  // }
 
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(channel);
+  // await flutterLocalNotificationsPlugin
+  //     .resolvePlatformSpecificImplementation<
+  //         AndroidFlutterLocalNotificationsPlugin>()
+  //     ?.createNotificationChannel(channel);
 
   await service.configure(
     androidConfiguration: AndroidConfiguration(
-      // this will be executed when app is in foreground or background in separated isolate
       onStart: onStart,
-
-      // auto start service
       autoStart: true,
       isForegroundMode: true,
 
-      notificationChannelId: 'my_foreground',
-      initialNotificationTitle: 'AWESOME SERVICE',
-      initialNotificationContent: 'Initializing',
-      foregroundServiceNotificationId: 888,
+      // notificationChannelId: 'my_foreground',
+      // initialNotificationTitle: 'AWESOME SERVICE',
+      // initialNotificationContent: 'Initializing',
+      // foregroundServiceNotificationId: 888,
     ),
     iosConfiguration: IosConfiguration(
       // auto start service
@@ -106,8 +105,8 @@ void onStart(ServiceInstance service) async {
   await preferences.setString("hello", "world");
 
   /// OPTIONAL when use custom notification
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  // final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  //     FlutterLocalNotificationsPlugin();
 
   if (service is AndroidServiceInstance) {
     service.on('setAsForeground').listen((event) {
@@ -129,19 +128,19 @@ void onStart(ServiceInstance service) async {
       if (await service.isForegroundService()) {
         /// OPTIONAL for use custom notification
         /// the notification id must be equals with AndroidConfiguration when you call configure() method.
-        flutterLocalNotificationsPlugin.show(
-          888,
-          'COOL SERVICE',
-          'Awesome ${DateTime.now()}',
-          const NotificationDetails(
-            android: AndroidNotificationDetails(
-              'my_foreground',
-              'MY FOREGROUND SERVICE',
-              icon: 'ic_bg_service_small',
-              ongoing: true,
-            ),
-          ),
-        );
+        // flutterLocalNotificationsPlugin.show(
+        //   888,
+        //   'COOL SERVICE',
+        //   'Awesome ${DateTime.now()}',
+        //   const NotificationDetails(
+        //     android: AndroidNotificationDetails(
+        //       'my_foreground',
+        //       'MY FOREGROUND SERVICE',
+        //       icon: 'ic_bg_service_small',
+        //       ongoing: true,
+        //     ),
+        //   ),
+        // );
 
         // if you don't using custom notification, uncomment this
         service.setForegroundNotificationInfo(
@@ -155,9 +154,9 @@ void onStart(ServiceInstance service) async {
     print('FLUTTER BACKGROUND SERVICE: ${DateTime.now()}');
     // ContorFunctions().notificationsPlugin()
     ContorFunctions().testMyfunction();
-     ContorFunctions().getUsageStats();
-     ContorFunctions().fetchInstalledApps();
-
+    ContorFunctions().getUsageStats();
+    ContorFunctions().fetchInstalledApps();
+    LocalNotificationService().showLocalNotification('title', 'ody');
     // test using external plugin
     final deviceInfo = DeviceInfoPlugin();
     String? device;
@@ -180,6 +179,7 @@ void onStart(ServiceInstance service) async {
     );
   });
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -193,6 +193,4 @@ class MyApp extends StatelessWidget {
         ),
         home: const HomeScreen());
   }
-
- 
 }

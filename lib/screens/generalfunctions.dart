@@ -13,16 +13,14 @@ import 'package:flutter_background/flutter_background.dart';
 // import 'package:android_intent/android_intent.dar
 import 'dart:async';
 
+import 'package:spaca/screens/notification.dart';
+
 class ContorFunctions {
   final FlutterLocalNotificationsPlugin notificationsPlugin =
       FlutterLocalNotificationsPlugin();
   _getAcces() async {
     final PermissionStatus permission = await Permission.contacts.status;
     if (permission.isGranted) {
-      // print('Karibu');
-      // final Map<Permission, PermissionStatus> permissionStatus =
-      //     await [Permission.contacts].request();
-      // return permissionStatus[Permission.contacts] ?? PermissionStatus.limited;
     } else {
       return permission;
     }
@@ -33,11 +31,7 @@ class ContorFunctions {
     DateTime startDate = endDate.subtract(Duration(hours: 1));
     List<AppInfo> appListItems =
         await InstalledApps.getInstalledApps(true, true);
-    // List<AppUsageInfo> usageList =
-    //       await AppUsage().getAppUsage(startDate, endDate);
-    // checkUsageApps(appListItems[].name.toString());
     print(appListItems[10].name.toString());
-    // print(usageList[10]);
 
     print(appListItems[10].name.toString());
   }
@@ -60,7 +54,7 @@ class ContorFunctions {
           await AppUsage().getAppUsage(startDate, endDate);
 
       for (var info in infoList) {
-        checkMaxmumUsage(info.usage.inSeconds, info.appName.toString());
+        await checkMaxmumUsage(info.usage.inSeconds, info.appName.toString());
       }
     } on AppUsageException catch (exception) {
       print(exception);
@@ -68,8 +62,13 @@ class ContorFunctions {
   }
 
   checkMaxmumUsage(int usageTime, String appused) {
-    int setedTime = 200;
-    if (usageTime > setedTime) {
+    int setedTime = 1000;
+    if (usageTime > setedTime && appused != "nexuslauncher") {
+      if (appused != 'android') {
+        LocalNotificationService()
+            .showLocalNotification(appused, 'IS Over used');
+      }
+
       print(appused);
       print(usageTime);
       print('Notifications is needed here boss');
