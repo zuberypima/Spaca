@@ -19,7 +19,7 @@ class ContorFunctions {
   _getAcces() async {
     final PermissionStatus permission = await Permission.contacts.status;
     if (permission.isGranted) {
-      print('Karibu');
+      // print('Karibu');
       // final Map<Permission, PermissionStatus> permissionStatus =
       //     await [Permission.contacts].request();
       // return permissionStatus[Permission.contacts] ?? PermissionStatus.limited;
@@ -60,15 +60,15 @@ class ContorFunctions {
           await AppUsage().getAppUsage(startDate, endDate);
 
       for (var info in infoList) {
-        checkMaxmumUsage(info.usage.inSeconds,info.appName.toString());
+        checkMaxmumUsage(info.usage.inSeconds, info.appName.toString());
       }
     } on AppUsageException catch (exception) {
       print(exception);
     }
   }
 
-  checkMaxmumUsage(int usageTime,String appused) {
-    int setedTime = 200;  
+  checkMaxmumUsage(int usageTime, String appused) {
+    int setedTime = 200;
     if (usageTime > setedTime) {
       print(appused);
       print(usageTime);
